@@ -1,0 +1,27 @@
+version: '3'
+services:
+  instance1:
+    build:
+      context: ./ # Specify the path to the Dockerfile for your instance1
+    ports:
+      - 8081:80 # Assuming your instance1 listens on port 80 internally
+
+  instance2:
+    build:
+      context: ./ # Specify the path to the Dockerfile for your instance2
+    ports:
+      - 8082:80 # Assuming your instance2 listens on port 8000 internally
+
+  instance3:
+    build:
+      context: ./ # Specify the path to the Dockerfile for your instance3
+    ports:
+      - 8083:80 # Assuming your instance3 listens on port 80 internally
+
+  load_balancer:
+    image: nginx
+    ports:
+      - 9090:9090 # Expose the load balancer on port 9090
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf # Mount a custom Nginx configuration file
+
